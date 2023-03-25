@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Currency Converter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #F6F7FB;
+      }
+      
+      h1 {
+        font-size: 36px;
+        margin-top: 50px;
+      }
+      
+      /* Form Styles */
+      form {
+        margin: 50px auto;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+      }
+      
+      label {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+      
+      input, select {
+        font-size: 20px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+      }
+      
+      button[type="submit"] {
+        font-size: 20px;
+        background-color: #3366CC;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      button[type="submit"]:hover {
+        background-color: #25476D;
+      }
+      
+      /* Language Selector Styles */
+      #language-selector {
+        margin-top: 50px;
+      }
+      
+      #language-selector span {
+        font-size: 30px;
+        cursor: pointer;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <h1>Currency Converter</h1>
+    <form action="https://api.whatsapp.com/send" method="get">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" min="0" step="0.01" required>
+      <label for="currency">Currency:</label>
+      <select id="currency" name="currency" required>
+        <option value="">Select Currency</option>
+        <option value="USD">US Dollar (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="EGP">Egyptian Pound (EGP)</option>
+      </select>
+      <input type="hidden" name="phone" value="+201024438296">
+      <button type="submit">Send to WhatsApp</button>
+    </form>
+    
+    <div id="language-selector">
+      <span id="us-flag">&#x1F1FA;&#x1F1F8;</span>
+      <span id="eg-flag">&#x1F1EA;&#x1F1EC;</span>
+      <span id="tr-flag">&#x1F1F9;&#x1F1F7;</span>
+    </div>
+    
+    <script>
+  // Language Selector Script
+  const usFlag = document.getElementById('us-flag');
+  const egFlag = document.getElementById('eg-flag');
+  const trFlag = document.getElementById('tr-flag');
+
+  const amountLabel = document.querySelector('label[for="amount"]');
+  const currencyLabel = document.querySelector('label[for="currency"]');
+  const submitButton = document.querySelector('button[type="submit"]');
+  const disclaimer = document.getElementById('disclaimer');
+
+  const updateLabels = (language) => {
+    switch (language) {
+      case 'en':
+        document.documentElement.lang = 'en';
+        amountLabel.textContent = 'Amount:';
+        currencyLabel.textContent = 'Currency:';
+        submitButton.textContent = 'Send to WhatsApp';
+        break;
+      case 'ar':
+        document.documentElement.lang = 'ar';
+        amountLabel.textContent = 'المبلغ:';
+        currencyLabel.textContent = 'العملة:';
+        submitButton.textContent = 'إرسال إلى الواتساب';
+        disclaimer.textContent = 'يرجى عدم مشاركة هذا الموقع مع أي شخص لا تعرفه.';
+        break;
+      case 'tr':
+        document.documentElement.lang = 'tr';
+        amountLabel.textContent = 'Miktar:';
+        currencyLabel.textContent = 'Para Birimi:';
+        submitButton.textContent = 'WhatsApp\'a Gönder';
+disclaimer.textContent = 'Lütfen bu web sitesini tanımadığınız kişilerle paylaşmayın.';
+        break;
+      default:
+        document.documentElement.lang = 'en';
+        amountLabel.textContent = 'Amount:';
+        currencyLabel.textContent = 'Currency:';
+        submitButton.textContent = 'Send to WhatsApp';
+disclaimer.textContent = 'Please do not share this website with anyone you do not know.';
+        break;
+    }
+  };
+
+  const updateLanguage = (language) => {
+    switch (language) {
+      case 'us':
+        updateLabels('en');
+        break;
+      case 'eg':
+        updateLabels('ar');
+        break;
+      case 'tr':
+        updateLabels('tr');
+        break;
+      default:
+        updateLabels('en');
+        break;
+    }
+  };
+
+  usFlag.addEventListener('click', () => updateLanguage('us'));
+  egFlag.addEventListener('click', () => updateLanguage('eg'));
+  trFlag.addEventListener('click', () => updateLanguage('tr'));
+
+  // Set default language
+  updateLabels('en');
+</script>
