@@ -9,7 +9,7 @@
       body {
         font-family: Arial, sans-serif;
         text-align: center;
-        background-color: #F6F7FB;
+        background-color: #ececec;
       }
       
       h1 {
@@ -19,7 +19,7 @@
       
       /* Form Styles */
       form {
-        margin: 50px auto;
+        margin: auto auto;
         max-width: 400px;
         padding: 20px;
         border-radius: 10px;
@@ -36,7 +36,7 @@
       
       input, select {
         font-size: 20px;
-        width: 100%;
+        width: inherit;
         padding: 10px;
         border-radius: 5px;
         border: none;
@@ -45,6 +45,7 @@
       }
       
       button[type="submit"] {
+        
         font-size: 20px;
         background-color: #3366CC;
         color: #FFFFFF;
@@ -54,6 +55,8 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
+
+      
       
       button[type="submit"]:hover {
         background-color: #25476D;
@@ -73,10 +76,10 @@
   </head>
   
   <body>
-    <h1>Exchange</h1>
+    <img src="assets/logo.png" height="100px">
     <form action="https://api.whatsapp.com/send" method="get">
       <label for="amount">Amount:</label>
-      <input type="number" pattern="[0-9]*" inputmode="numeric" id="amount" name="amount" min="0" step="0.01" required>
+      <input type="number" autofocus pattern="[0-9]*" inputmode="numeric" id="amount" name="amount" min="0" step="0.01" required>
       <label for="currency">Currency:</label>
       <select id="currency" name="currency" required>
         <option value="">Select Currency</option>
@@ -85,7 +88,7 @@
         <option value="EGP">Egyptian Pound (EGP)</option>
       </select>
       <input type="hidden" name="phone" value="+201024438296">
-      <button type="submit">Send to WhatsApp</button>
+      <button type="submit"  >Send to WhatsApp</button>
     </form>
     
     <div id="language-selector">
@@ -93,7 +96,7 @@
       <span id="eg-flag">&#x1F1EA;&#x1F1EC;</span>
       <span id="tr-flag">&#x1F1F9;&#x1F1F7;</span>
     </div>
-    
+    <div id="disclaimer" style="color: #737578;"></div>
     <script>
   // Language Selector Script
   const usFlag = document.getElementById('us-flag');
@@ -112,6 +115,7 @@
         amountLabel.textContent = 'Amount:';
         currencyLabel.textContent = 'Currency:';
         submitButton.textContent = 'Send to WhatsApp';
+        disclaimer.textContent = 'Please don\'t share this website to unknown person';
         break;
       case 'ar':
         document.documentElement.lang = 'ar';
