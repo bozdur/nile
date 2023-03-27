@@ -1,0 +1,876 @@
+<html lang="en"><head>
+    <title>Nil Market</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #d9d9d9;
+      }
+      
+      h1 {
+        font-size: 36px;
+        margin-top: 50px;
+      }
+      
+      /* Form Styles */
+      form {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 500px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f1f0f0;
+        box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+      }
+      
+      label {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 10px;
+        color: #a5a5a5;
+      }
+      
+      input{
+        font-size: 20px;
+        width: 100;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+      }
+      select {
+        font-size: 20px;
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+      }
+      
+      button {
+        margin-top: 20px;
+        font-size: 20px;
+        background-color: #128C7E;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 5px 10px rgba(75, 185, 101, 0.2);
+      }
+
+      
+      
+      button:hover {
+        background-color: #25D366;
+      }
+      
+      /* Language Selector Styles */
+      #language-selector {
+        margin-top: 50px;
+      }
+      
+      #language-selector span {
+        font-size: 30px;
+        cursor: pointer;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  
+  <body>
+    
+    <img style="margin-bottom:-80px;" src="https://cdn-icons-png.flaticon.com/512/5067/5067083.png" height="80px" contenteditable="false" class="">
+    <form contenteditable="false" class="">
+      <label for="amount" contenteditable="false" class="">Amount</label>
+      <input id="amount" type="number" autofocus="" autocomplete="off" pattern="[0-9]*" inputmode="numeric" min="0" step="10" contenteditable="false" class="">
+      <label for="currency" contenteditable="false" class="">Currency</label>
+      <select id="currency" name="currency" contenteditable="false" class="">
+        <option value="">Select Currency</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EURO</option>
+        <option value="EGP">EGP</option>
+      </select>&nbsp; &nbsp;&nbsp;<img height="20px" src="https://cdn-icons-png.flaticon.com/512/275/275134.png" alt="Right arrow - Free arrows icons" class="" contenteditable="false">&nbsp; &nbsp;&nbsp;<select id="currency" name="currency" class="" contenteditable="false">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<option value="">Select Currency</option>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<option value="USD">USD</option>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<option value="EUR">EURO</option>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<option value="EGP">EGP</option>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</select><br>
+      <i style="color: red; padding: 20px;" id="check" class="">Please enter an amount</i>
+    </form>
+    
+    <br>
+    <button onclick="validateF()" type="submit" contenteditable="false" class="">Send to WhatsApp</button>
+    <script>
+        function validateF(){
+           var am = document.getElementById("amount").value;
+           var cr = document.getElementById("currency").value;
+           if(am==''){
+            document.getElementById("check").innerText = 'Please enter an amount';
+           }else if(cr==''){
+            document.getElementById("check").innerText = 'Please choose a currency';
+           }else{
+            //validation complete action
+            var msg = "I want to convert "+am+" "+cr;
+			var url = "https://api.whatsapp.com/send?phone=201024438296&text=" + msg;
+			window.location = url;
+		
+           
+        }
+        }
+    </script>
+    
+    <div id="language-selector" contenteditable="false" class="">
+      <span id="us-flag" class="">🇺🇸</span>
+      <span id="eg-flag" class="">🇪🇬</span>
+      <span id="tr-flag" class="">🇹🇷</span>
+    </div><img height="50px" src="https://cdn-icons-png.flaticon.com/512/3898/3898082.png">
+    <div id="disclaimer" style="color: #737578;" contenteditable="false" class="">Please don't share this website to unknown person</div>
+    <script>
+  // Language Selector Script
+  const usFlag = document.getElementById('us-flag');
+  const egFlag = document.getElementById('eg-flag');
+  const trFlag = document.getElementById('tr-flag');
+
+  const amountLabel = document.querySelector('label[for="amount"]');
+  const currencyLabel = document.querySelector('label[for="currency"]');
+  const submitButton = document.querySelector('button');
+  const disclaimer = document.getElementById('disclaimer');
+
+  const updateLabels = (language) => {
+    switch (language) {
+      case 'en':
+        document.documentElement.lang = 'en';
+        amountLabel.textContent = 'Amount';
+        currencyLabel.textContent = 'Currency';
+        submitButton.textContent = 'Send to WhatsApp';
+        disclaimer.textContent = 'Please don\'t share this website to unknown person';
+        break;
+      case 'ar':
+        document.documentElement.lang = 'ar';
+        amountLabel.textContent = 'المبلغ';
+        currencyLabel.textContent = 'العملة';
+        submitButton.textContent = 'إرسال إلى الواتساب';
+        disclaimer.textContent = 'يرجى عدم مشاركة هذا الموقع مع أي شخص لا تعرفه.';
+        break;
+      case 'tr':
+        document.documentElement.lang = 'tr';
+        amountLabel.textContent = 'Miktar';
+        currencyLabel.textContent = 'Para Birimi';
+        submitButton.textContent = 'WhatsApp\'a Gönder';
+        disclaimer.textContent = 'Lütfen bu web sitesini tanımadığınız kişilerle paylaşmayın.';
+        break;
+      default:
+        document.documentElement.lang = 'en';
+        amountLabel.textContent = 'Amount';
+        currencyLabel.textContent = 'Currency';
+        submitButton.textContent = 'Send to WhatsApp';
+        disclaimer.textContent = 'Please do not share this website with anyone you do not know.';
+        break;
+    }
+  };
+
+  const updateLanguage = (language) => {
+    switch (language) {
+      case 'us':
+        updateLabels('en');
+        break;
+      case 'eg':
+        updateLabels('ar');
+        break;
+      case 'tr':
+        updateLabels('tr');
+        break;
+      default:
+        updateLabels('en');
+        break;
+    }
+  };
+
+  usFlag.addEventListener('click', () => updateLanguage('us'));
+  egFlag.addEventListener('click', () => updateLanguage('eg'));
+  trFlag.addEventListener('click', () => updateLanguage('tr'));
+
+  // Set default language
+  updateLabels('en');
+</script>
+<aside contenteditable="false" id="color_picker" style="display: none; top: 382.391px; left: 1052px;">
+		<svg id="color_box" width="263" height="130">
+			<defs>
+				<linearGradient id="saturation" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" stop-color="#fff"></stop>
+					<stop offset="100%" stop-color="hsl(134, 100%, 50%)"></stop>
+				</linearGradient>
+				<linearGradient id="brightness" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="rgba(0,0,0,0)"></stop>
+					<stop offset="100%" stop-color="#000"></stop>
+				</linearGradient>
+				<pattern id="pattern_config" width="100%" height="100%">
+					<rect x="0" y="0" width="100%" height="100%" fill="url(#saturation)"></rect> }
+					<rect x="0" y="0" width="100%" height="100%" fill="url(#brightness)"></rect>
+				</pattern>
+			</defs>
+			<rect rx="5" ry="5" x="1" y="1" width="263" height="130" stroke="#fff" stroke-width="2" fill="url(#pattern_config)"></rect>
+			<svg id="box_dragger" x="78" y="43.609375" style="overflow: visible;">
+				<circle r="9" fill="none" stroke="#000" stroke-width="2"></circle>
+				<circle r="7" fill="none" stroke="#fff" stroke-width="2"></circle>
+			</svg>
+		</svg>
+		<br>
+		<div id="sliders">
+			<svg id="color_slider" width="263" height="20">
+				<defs>
+					<linearGradient id="hue" x1="100%" y1="0%" x2="0%" y2="0%">
+						<stop offset="0%" stop-color="#f00"></stop>
+						<stop offset="16.666%" stop-color="#ff0"></stop>
+						<stop offset="33.333%" stop-color="#0f0"></stop>
+						<stop offset="50%" stop-color="#0ff"></stop>
+						<stop offset="66.666%" stop-color="#00f"></stop>
+						<stop offset="83.333%" stop-color="#f0f"></stop>
+						<stop offset="100%" stop-color="#f00"></stop>
+					</linearGradient>
+				</defs>
+				<rect rx="5" ry="5" x="1" y="1" width="263" height="20" stroke="#fff" stroke-width="2" fill="url(#hue)"></rect>
+				<svg id="color_slider_dragger" x="163.92479108635095" y="11" style="overflow: visible;">
+					<circle r="7" fill="none" stroke="#000" stroke-width="2"></circle>
+					<circle r="5" fill="none" stroke="#fff" stroke-width="2"></circle>
+				</svg>
+			</svg>
+			<svg id="opacity_slider" width="263" height="20">
+				<defs>
+					<linearGradient id="opacity" x1="100%" y1="0%" x2="0%" y2="0%">
+						<stop offset="0%" stop-color="#000"></stop>
+						<stop offset="100%" stop-color="#fff"></stop>
+					</linearGradient>
+				</defs>
+				<rect rx="5" ry="5" x="1" y="6" width="263" height="10" stroke="#fff" stroke-width="2" fill="url(#opacity)"></rect>
+				<svg id="opacity_slider_dragger" x="59.8" y="11" style="overflow: visible;">
+					<circle r="7" fill="none" stroke="#000" stroke-width="2"></circle>
+					<circle r="5" fill="none" stroke="#fff" stroke-width="2"></circle>
+				</svg>
+			</svg>
+		</div>
+		<div id="color_text_values" tabindex="0">
+			<div id="hexa">
+				<input id="hex_input" name="hex_input" type="text" maxlength="9" spellcheck="false">
+				<br>
+				<label for="hex_input" class="label_text">HEX</label>
+			</div>
+			<div id="rgba" style="display: none;">
+				<div class="rgba_divider">
+					<input class="rgba_input" name="r" type="number" min="0" max="255">
+					<br>
+					<label for="r" class="label_text">R</label>
+				</div>
+				<div class="rgba_divider">
+					<input class="rgba_input" name="g" type="number" min="0" max="255">
+					<br>
+					<label for="g" class="label_text">G</label>
+				</div>
+				<div class="rgba_divider">
+					<input class="rgba_input" name="b" type="number" min="0" max="255">
+					<br>
+					<label for="b" class="label_text">B</label>
+				</div>
+				<div class="rgba_divider">
+					<input class="rgba_input" name="a" type="number" step="0.1" min="0" max="1">
+					<br>
+					<label for="a" class="label_text">A</label>
+				</div>
+			</div>
+			<div id="hsla" style="display: none;">
+				<div class="hsla_divider">
+					<input class="hsla_input" name="h" type="number" min="0" max="359">
+					<br>
+					<label for="h" class="label_text">H</label>
+				</div>
+				<div class="hsla_divider">
+					<input class="hsla_input" name="s" type="number" min="0" max="100">
+					<br>
+					<label for="s" class="label_text">S%</label>
+				</div>
+				<div class="hsla_divider">
+					<input class="hsla_input" name="l" type="number" min="0" max="100">
+					<br>
+					<label for="l" class="label_text">L%</label>
+				</div>
+				<div class="rgba_divider">
+					<input class="hsla_input" name="a" type="number" step="0.1" min="0" max="1">
+					<br>
+					<label for="a" class="label_text">A</label>
+				</div>
+			</div>
+			<button id="switch_color_type" class="remove_outline" name="switch-color-type">
+				<svg viewBox="0 -2 24 24" width="20" height="20">
+					<path fill="#555" d="M6 11v-4l-6 5 6 5v-4h12v4l6-5-6-5v4z"></path>
+				</svg>
+			</button>
+		</div>
+		<div id="custom_colors">
+			<div id="custom_colors_header">
+				<svg id="custom_colors_pallet_icon" viewBox="0 0 24 24" width="15" height="18">
+					<path fill="#555" d="M4 21.832c4.587.38 2.944-4.493 7.188-4.538l1.838 1.534c.458 5.538-6.315 6.773-9.026 3.004zm14.065-7.115c1.427-2.239 5.847-9.749 5.847-9.749.352-.623-.43-1.273-.976-.813 0 0-6.572 5.714-8.511 7.525-1.532 1.432-1.539 2.086-2.035 4.447l1.68 1.4c2.227-.915 2.868-1.039 3.995-2.81zm-11.999 3.876c.666-1.134 1.748-2.977 4.447-3.262.434-2.087.607-3.3 2.547-5.112 1.373-1.282 4.938-4.409 7.021-6.229-1-2.208-4.141-4.023-8.178-3.99-6.624.055-11.956 5.465-11.903 12.092.023 2.911 1.081 5.571 2.82 7.635 1.618.429 2.376.348 3.246-1.134zm6.952-15.835c1.102-.006 2.005.881 2.016 1.983.004 1.103-.882 2.009-1.986 2.016-1.105.009-2.008-.88-2.014-1.984-.013-1.106.876-2.006 1.984-2.015zm-5.997 2.001c1.102-.01 2.008.877 2.012 1.983.012 1.106-.88 2.005-1.98 2.016-1.106.007-2.009-.881-2.016-1.988-.009-1.103.877-2.004 1.984-2.011zm-2.003 5.998c1.106-.007 2.01.882 2.016 1.985.01 1.104-.88 2.008-1.986 2.015-1.105.008-2.005-.88-2.011-1.985-.011-1.105.879-2.004 1.981-2.015zm10.031 8.532c.021 2.239-.882 3.718-1.682 4.587l-.046.044c5.255-.591 9.062-4.304 6.266-7.889-1.373 2.047-2.534 2.442-4.538 3.258z"></path>
+				</svg>
+				<button id="custom_colors_add" class="remove_outline" name="add-a-custom-color">
+					<svg viewBox="0 -2 24 24" width="14" height="16">
+						<path fill="#555" d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path>
+					</svg>
+				</button>
+			</div>
+			<div id="custom_colors_box">
+			</div>
+		</div>
+		<div id="color_context_menu" class="color_ctx_menu" style="display: none;">
+			<button id="color_clear_single" class="color_ctx_menu" name="remove-single-color">Remove</button>
+			<button id="color_clear_all" class="color_ctx_menu" name="remove-all-colors">Remove All</button>
+		</div>
+	</aside><style type="text/css" id="weStylesheet">html>body>form { box-shadow : rgba(0, 0, 0, 0.2) 0px 1px 1px ; text-align : center; 
+line-height : px; 
+width : 500px; 
+max-width : 500px; 
+} 
+html>body>button { box-shadow : rgba(136, 185, 148, 0.2) 0px -1px 2px ; background-color : rgba(37, 211, 101, 1); 
+} 
+html>body>#language-selector>div>font { text-align : center; } 
+html>body>#language-selector>div { text-align : center; } 
+</style><div id="we-app-window" contenteditable="false" style="display: none; top: 10px; left: 10px;"> 
+ <header id="we-app-header" contenteditable="false">
+    <h3 id="we-header-title" contenteditable="false">Web Editor</h3>
+    <button id="we-app-btn-close" contenteditable="false">×</button>
+  </header>
+  <div id="we-app-body" contenteditable="false">
+    
+    <div id="we-editor-pane" class="main-tab-pane active">
+      <div id="we-content-previewer">
+        <div id="we-img-content" style="display: block;">
+          <div id="we-content-img-wrapper" style="background-image: url(&quot;https://cdn-icons-png.flaticon.com/512/3898/3898082.png&quot;); background-color: rgba(0, 0, 0, 0);">
+            <input type="file" accept="image/x-png,image/gif,image/jpeg" id="we-img-control" contenteditable="false">
+            <div id="we-image-chooser" contenteditable="false">
+              <span contenteditable="false">Choose Image..</span>
+            </div>
+          </div>
+          <div class="we-hr-from">
+            <div class="we-control-group">
+              <label>Image URL</label>
+              <input type="text" placeholder="Image URL" id="we-img-url" class="we-control">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="we-allignment" class="we-hr-from" style="display: none;">
+        <button class="we-btn" data-align="left" id="we-align-left"></button>
+        <button class="we-btn active" data-align="center" id="we-align-center"></button>
+        <button class="we-btn" data-align="right" id="we-align-right"></button>
+        <button class="we-btn" data-align="justify" id="we-align-justify"></button>
+      </div>
+
+    <div id="we-typo" style="display: none;">
+      <div class="we-hr-from">
+        <div class="we-control-group we-color-group">
+          <label>Color</label>
+          <button class="we-clr-btn" id="we-fc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+        </div>
+
+        <div class="we-control-group">
+          <label>Style</label>
+          <button class="we-btn" id="we-fb">B</button>
+          <button class="we-btn" id="we-fu">U</button>
+          <button class="we-btn" id="we-fi">i</button>
+        </div>
+      </div>
+      <div class="we-hr-from">
+        <div class="we-control-group">
+          <label>Font Size</label>
+          <input data-target="fontSize" type="number" min="0" id="we-fzc" class="we-control">
+        </div>
+        <div class="we-control-group">
+          <label>Line Height</label>
+          <input data-target="lineHeight" type="number" min="0" id="we-flhc" class="we-control">
+        </div>
+
+        <div class="we-control-group">
+          <label>Letter Spacing</label>
+          <input data-target="letterSpacing" type="number" min="0" id="we-flsc" class="we-control">
+        </div>
+      </div>
+    </div>
+
+    <div id="we-size" style="display: none;">
+      <div class="we-hr-from">
+        <div class="we-control-group">
+          <label>Width</label>
+          <input type="number" min="0" id="we-swc" class="we-control">
+        </div>
+
+        <div class="we-control-group">
+          <label>Height</label>
+          <input type="number" min="0" id="we-shc" class="we-control">
+        </div>
+      </div>
+    </div>
+
+    <div id="we-spacing">
+      <div id="we-margin">
+        <h4 class="we-h4">Margin: Outer Spacing</h4>
+        <div class="we-hr-from">
+          <div class="we-control-group">
+            <label>Top</label>
+            <input data-target="marginTop" type="number" id="we-mtc" class="we-control" disabled="">
+          </div>
+
+          <div class="we-control-group">
+            <label>Left</label>
+            <input data-target="marginLeft" type="number" id="we-mlc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Right</label>
+            <input data-target="marginRight" type="number" id="we-mrc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Bottom</label>
+            <input data-target="marginBottom" type="number" id="we-mbc" class="we-control" disabled="">
+          </div>
+
+        </div>
+      </div>
+
+      <div id="we-padding">
+        <h4 class="we-h4">Padding: Inner Spacing</h4>
+        <div class="we-hr-from">
+          <div class="we-control-group">
+            <label>Top</label>
+            <input data-target="paddingTop" type="number" min="0" id="we-ptc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Left</label>
+            <input data-target="paddingLeft" type="number" min="0" id="we-plc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Right</label>
+            <input data-target="paddingRight" type="number" min="0" id="we-prc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Bottom</label>
+            <input data-target="paddingBottom" type="number" min="0" id="we-pbc" class="we-control">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="we-border">
+      <h4 class="we-h4">Border</h4>
+      <div id="we-border-container">
+        <div id="we-border-forms">
+
+          <div id="we-border-form-all" class="we-hr-from" style="display: flex;">
+            <div class="we-control-group">
+              <label>Size</label>
+              <input data-target="borderWidth" type="number" min="0" id="we-bsc" class="we-control">
+            </div>
+            <div class="we-control-group we-select-group">
+              <label>Style</label>
+              <select data-target="borderStyle" id="we-bct" class="we-control">
+                <option value="none">None</option>
+                <option value="solid">Solid</option>
+                <option value="dotted">Dotted</option>
+                <option value="dashed">Dashed</option>
+                <option value="double">Double</option>
+                <option value="groove">Groove</option>
+                <option value="ridge">Ridge</option>
+                <option value="inset">Inset</option>
+                <option value="outset">Outset</option>
+              </select>
+            </div>
+            <div class="we-control-group we-color-group">
+              <label>Color</label>
+              <button class="we-clr-btn" id="we-bcc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+            </div>
+          </div>
+          <!--End All -->
+
+          <div id="we-border-split" style="display: none;">
+
+            <div class="we-hr-from active">
+              <div class="we-control-group">
+                <label>Top: Size </label>
+                <input data-target="borderTopWidth" type="number" min="0" id="we-bt-sc" class="we-control">
+              </div>
+              <div class="we-control-group we-select-group">
+                <label>Style</label>
+                <select data-target="borderTopStyle" id="we-bt-ct" class="we-control">
+                  <option value="none">None</option>
+                  <option value="solid">Solid</option>
+                  <option value="dotted">Dotted</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="double">Double</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
+              </div>
+              <div class="we-control-group we-color-group">
+                <label>Color</label>
+                <button class="we-clr-btn" id="we-bt-cc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+              </div>
+            </div>
+
+            <div class="we-hr-from active">
+              <div class="we-control-group">
+                <label>Left: Size </label>
+                <input data-target="borderLeftWidth" type="number" min="0" id="we-bl-sc" class="we-control">
+              </div>
+              <div class="we-control-group we-select-group">
+                <label>Style</label>
+                <select data-target="borderLeftStyle" id="we-bl-ct" class="we-control">
+                  <option value="none">None</option>
+                  <option value="solid">Solid</option>
+                  <option value="dotted">Dotted</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="double">Double</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
+              </div>
+              <div class="we-control-group we-color-group">
+                <label>Color</label>
+                <button class="we-clr-btn" id="we-bl-cc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+              </div>
+            </div>
+
+            <div class="we-hr-from active">
+              <div class="we-control-group">
+                <label>Right: Size </label>
+                <input data-target="borderRightWidth" type="number" min="0" id="we-br-sc" class="we-control">
+              </div>
+              <div class="we-control-group we-select-group">
+                <label>Style</label>
+                <select data-target="borderRightStyle" id="we-br-ct" class="we-control">
+                  <option value="none">None</option>
+                  <option value="solid">Solid</option>
+                  <option value="dotted">Dotted</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="double">Double</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
+              </div>
+              <div class="we-control-group we-color-group">
+                <label>Color</label>
+                <button class="we-clr-btn" id="we-br-cc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+              </div>
+            </div>
+
+            <div class="we-hr-from active">
+              <div class="we-control-group">
+                <label>Bottom: Size </label>
+                <input data-target="borderBottomWidth" type="number" min="0" id="we-bb-sc" class="we-control">
+              </div>
+              <div class="we-control-group we-select-group">
+                <label>Style</label>
+                <select data-target="borderBottomStyle" id="we-bb-ct" class="we-control">
+                  <option value="none">None</option>
+                  <option value="solid">Solid</option>
+                  <option value="dotted">Dotted</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="double">Double</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
+              </div>
+              <div class="we-control-group we-color-group">
+                <label>Color</label>
+                <button class="we-clr-btn" id="we-bb-cc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--  -->
+        <button title="Unlink controls" class="we-btn we-btn-chain" id="toggleBorderLink"><i class="we-ico-link" contenteditable="false"></i></button>
+
+      </div>
+
+      <div id="we-border-radius">
+        <label class="we-control-lable">Border Radius</label>
+        <div id="we-border-radius-form" class="we-hr-from we-space-less-form">
+          <div class="we-control-group">
+            <input data-prop="tl" data-link="borderRadius" min="0" type="number" id="we-radius-tl" class="we-control">
+          </div>
+          <div class="we-control-group">
+            <input data-prop="tr" data-link="borderRadius" min="0" type="number" id="we-radius-tr" class=" we-control">
+          </div>
+          <div class="we-control-group">
+            <input data-prop="br" data-link="borderRadius" min="0" type="number" id="we-radius-br" class="we-control">
+          </div>
+          <div class="we-control-group">
+            <input data-prop="bl" data-link="borderRadius" min="0" type="number" id="we-radius-bl" class="we-control">
+          </div>
+          <button title="Unlink controls" id="toggleBorderRadius" class="we-btn we-btn-chain"><i class="we-ico-link" contenteditable="false"></i></button>
+        </div>
+      </div>
+
+      <div id="we-box-shadow">
+        <h4 class="we-h4">Box Shadow</h4>
+        <div class="we-hr-from">
+          <div class="we-control-group we-color-group">
+            <label>Color</label>
+            <button class="we-clr-btn" id="we-bxsdc" data-color="#000000" style="background: rgb(0, 0, 0);"></button>
+          </div>
+          <div class="we-control-group">
+            <label>Horizontal</label>
+            <input type="number" id="we-bxsh-x" class="we-control">
+          </div>
+          <div class="we-control-group">
+            <label>Vertical</label>
+            <input type="number" id="we-bxsh-y" class="we-control">
+          </div>
+          <div class="we-control-group">
+            <label>Blur</label>
+            <input type="number" min="0" id="we-bxsh-blr" class="we-control">
+          </div>
+          <div class="we-control-group">
+            <label>Position</label>
+            <select data-target="backgroundRepeat" id="we-bxsh-pos" class="we-control">
+              <option value="">Outline</option>
+              <option value="inset">Inset</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div id="we-background" style="display: block;">
+      <h4 class="we-h4">Background</h4>
+
+      <div class="we-hr-from">
+        <div class="we-control-group we-color-group">
+          <label>Color</label>
+          <button class="we-clr-btn" id="we-bgcc" data-color="#00000000" style="background: rgba(0, 0, 0, 0);"></button>
+        </div>
+      </div>
+
+      <div class="we-tab-nav">
+        <button data-tabpane="#we-tab-pan-bg" id="we-tab-btn-bg" class="we-btn we-tab-btn active">Image</button>
+        <button data-tabpane="#we-tab-pan-grd" id="we-tab-btn-grd" class="we-btn we-tab-btn">Gradient</button>
+      </div>
+      <div class="we-tab-container">
+        <div id="we-tab-pan-bg" class="we-tab-pan active">
+          
+          <div id="we-bg-img-holder">
+            <div id="we-background-img-wrapper" style="background-image: none;">
+              <input type="file" accept="image/x-png,image/gif,image/jpeg" id="we-bg-control" contenteditable="false">
+              <div id="we-bg-chooser" contenteditable="false">
+                <span contenteditable="false">Choose Image..</span>
+              </div>
+              <button id="we-bg-remove" style="display: none;">×</button>
+            </div>
+          </div>
+
+          <div class="we-hr-from">
+            <div class="we-control-group">
+              <label>Background Image URL</label>
+              <input type="text" placeholder="Enter image URL" id="we-bg-url" class="we-control">
+            </div>
+          </div>
+        </div>
+        <div id="we-tab-pan-grd" class="we-tab-pan">
+
+          <div id="we-grd-bg-showcase"></div>
+
+          <div id="we-grd-container">
+            <div class="we-hr-from grd-props">
+              <div class="we-control-group">
+                <label>Gradient Type</label>
+                <select id="grd-type" class="we-control">
+                  <option value="linear-gradient">Linear</option>
+                  <option value="radial-gradient">Radial</option>
+                </select>
+              </div>
+              <div class="we-control-group" id="grd-angle">
+                <label>Angle</label>
+                <div class="we-flex">
+                  <input type="range" min="0" max="360" value="90" id="we-angle-range" class="we-control">
+                  <input type="number" min="0" max="360" value="90" id="we-angle-numb" class="we-control">
+                </div>
+
+              </div>
+            </div>
+            <div id="grd-clr-box">
+            </div>
+            <div class="grd-clr-action">
+              <button class="we-btn we-btn-circle" id="add-grd-btn">+</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="we-bg-prop" style="display: none;">
+        <div class="we-hr-from">
+          <div class="we-control-group">
+            <label>Postion X</label>
+            <input data-target="backgroundPositionX" type="number" id="we-bgxc" class="we-control">
+          </div>
+
+          <div class="we-control-group">
+            <label>Postion Y</label>
+            <input data-target="backgroundPositionY" type="number" id="we-bgyc" class="we-control">
+          </div>
+
+          <div class="we-control-group we-select-group">
+            <label>Repeat</label>
+            <select data-target="backgroundRepeat" id="we-bgrc" class="we-control">
+              <option value="repeat">Repeat</option>
+              <option value="repeat-x">Repeat-x</option>
+              <option value="repeat-y">Repeat-y</option>
+              <option value="no-repeat">No-repeat</option>
+              <option value="space">Space</option>
+              <option value="round">Roundt</option>
+            </select>
+          </div>
+
+          <div class="we-control-group we-select-group">
+            <label>Attchment</label>
+            <select data-target="backgroundAttachment" id="we-bgac" class="we-control">
+              <option value="initial">Initial</option>
+              <option value="scroll">Scroll</option>
+              <option value="fixed">Fixed</option>
+              <option value="local">Local</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="we-hr-from">
+          <div class="we-control-group we-select-group">
+            <label>Size</label>
+            <select id="we-bgszsc" class="we-control">
+              <option value="initial">Initial</option>
+              <option value="auto">auto</option>
+              <option value="cover">cover</option>
+              <option value="contain">contain</option>
+              <option value="custom">custom</option>
+            </select>
+          </div>
+
+          <div id="we-c-bg-grp" style="display: flex;">
+            <div class="we-control-group">
+              <label>Height</label>
+              <input type="number" min="0" id="we-bgszhc" class="we-control">
+            </div>
+
+            <div class="we-control-group">
+              <label>Width</label>
+              <input type="number" min="0" id="we-bgszwc" class="we-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/. Eidtor Pane -->
+
+    <!-- Properties Pane -->
+    <div id="we-properties-pane" class="main-tab-pane">
+      <div class="we-tab-collection">
+        <div class="we-tab-nav">
+          <button data-tab="we-color-pane" class="we-btn-tab we-tab-btn we-btn">Colors</button>
+          <button data-tab="we-image-pane" class="we-btn-tab we-tab-btn we-btn active">Images</button>
+        </div>
+
+        <div class="we-tab-container">
+          <!-- Colors Pane -->
+          <div id="we-color-pane" class="we-tab-pane">
+            <ul id="we-color-palette"><li style="background-color: rgb(0, 0, 0); color: #FFFFFF">
+      <span class="color-code"> #000000FF </span>
+      <button title="Copy color" data-color="#000000FF" class="we-copy-color"></button>
+    </li><li style="background-color: rgba(0, 0, 0, 0); color: #050505">
+      <span class="color-code"> #00000000 </span>
+      <button title="Copy color" data-color="#00000000" class="we-copy-color"></button>
+    </li><li style="background-color: rgb(241, 240, 240); color: #050505">
+      <span class="color-code"> #f1f0f0FF </span>
+      <button title="Copy color" data-color="#f1f0f0FF" class="we-copy-color"></button>
+    </li><li style="background-color: rgb(165, 165, 165); color: #050505">
+      <span class="color-code"> #a5a5a5FF </span>
+      <button title="Copy color" data-color="#a5a5a5FF" class="we-copy-color"></button>
+    </li><li style="background-color: rgb(255, 255, 255); color: #050505">
+      <span class="color-code"> #ffffffFF </span>
+      <button title="Copy color" data-color="#ffffffFF" class="we-copy-color"></button>
+    </li><li style="background-color: rgb(18, 140, 126); color: #FFFFFF">
+      <span class="color-code"> #128c7eFF </span>
+      <button title="Copy color" data-color="#128c7eFF" class="we-copy-color"></button>
+    </li><li style="background-color: rgb(115, 117, 120); color: #FFFFFF">
+      <span class="color-code"> #737578FF </span>
+      <button title="Copy color" data-color="#737578FF" class="we-copy-color"></button>
+    </li></ul>
+          </div>
+          <!--/. Colors Pane -->
+      
+          <!-- Image Pane -->
+          <div id="we-image-pane" class="we-tab-pane active">
+            <div id="we-img-grid"><div class="we-img-cl">
+      <img src="https://cdn-icons-png.flaticon.com/512/5067/5067083.png">
+      <div class="we-img-overlay">
+        <a href="https://cdn-icons-png.flaticon.com/512/5067/5067083.png" download="" title="download" class="we-img-download">
+          <i class="we-ico-download"></i>
+        </a>
+      </div>
+    </div></div>
+          </div>
+          <!--/. Image Pane -->
+        </div>
+      </div>
+    </div>
+    <!--/. Properties Pane -->
+
+
+
+
+    <!-- CSS Pane -->
+    <div id="we-css-pane" class="main-tab-pane">
+      <div id="we-css-save">
+        <div id="we-toggle-box">
+          <span>Keep Change </span>
+          <div class="toggle">
+            <input type="checkbox" id="we-store-css">
+            <label></label>
+          </div>
+        </div>
+        <p>Changes will be saved locally in brower. It wil be lost once you reset the browser</p>
+      </div>
+      <h4 id="we-css-title"></h4>
+      <ul id="we-css-note" contenteditable="true"></ul>
+      <button class="we-btn we-btn-outline" id="we-el-css" style="display: none">Element CSS</button>
+      <button class="we-btn we-btn-outline" id="we-full-css">Full WE Stylesheet</button>
+    </div>
+    <!--/. CSS Pane -->
+  </div>
+  <div id="we-footer">
+    <div id="we-foot-nav">
+      <button data-tab="we-editor-pane" class="we-foot-nav-btn active">Editor</button>
+      <button data-tab="we-properties-pane" class="we-foot-nav-btn">Properties</button>
+      <button data-tab="we-css-pane" class="we-foot-nav-btn">CSS</button>
+    </div>
+    <div id="we-resizer"></div>
+  </div>
+
+ </div></body></html>
