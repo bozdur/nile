@@ -1,227 +1,241 @@
-<html lang="en"><head>
+<html lang="en">
+
+<head>
     <title>Nil Market</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      /* Global Styles */
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #d9d9d9;
-      }
-      
-      h1 {
-        font-size: 36px;
-        margin-top: 50px;
-      }
-      
-      /* Form Styles */
-      form {
-        margin-top: 100px;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 300px;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #f1f0f0;
-        box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
-      }
-      
-      label {
-        font-size: 20px;
-        display: block;
-        margin-bottom: 10px;
-        color: #a5a5a5;
-      }
-      
-      input{
-        font-size: 20px;
-        width: 200;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        margin-bottom: 40px;
-      }
-      select {
-        font-size: 20px;
-        width: 200px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        
-      }
-      
-      button {
-        margin-top: 20px;
-        font-size: 20px;
-        background-color: #128C7E;
-        color: #FFFFFF;
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0px 5px 10px rgba(75, 185, 101, 0.2);
-      }
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #d9d9d9;
+        }
 
-      
-      
-      button:hover {
-        background-color: #25D366;
-      }
-      
-      /* Language Selector Styles */
-      #language-selector {
-        margin-top: 50px;
-      }
-      
-      #language-selector span {
-        font-size: 30px;
-        cursor: pointer;
-        margin: 10px;
-      }
+        h1 {
+            font-size: 36px;
+            margin-top: 50px;
+        }
+
+        /* Form Styles */
+        form {
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f1f0f0;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+            color: #a5a5a5;
+        }
+
+        input {
+            font-size: 20px;
+            width: 200;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        select {
+            font-size: 20px;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+        }
+
+        button {
+            margin-top: 20px;
+            font-size: 20px;
+            background-color: #128C7E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 5px 10px rgba(75, 185, 101, 0.2);
+        }
+
+
+
+        button:hover {
+            background-color: #25D366;
+        }
+
+        /* Language Selector Styles */
+        #language-selector {
+            margin-top: 50px;
+        }
+
+        #language-selector span {
+            font-size: 30px;
+            cursor: pointer;
+            margin: 10px;
+        }
     </style>
-  </head>
-  
-  <body>
-    
-    <img style="margin-bottom:-80px;" src="https://cdn-icons-png.flaticon.com/512/5067/5067083.png" height="80px"  >
-    <form >
-      <label for="amount" >Amount</label>
-      <input onchange="validateF()" id="amount" type="number" autofocus autocomplete="off" pattern="[0-9]*" inputmode="numeric" min="0" step="10"  >
-      
-      <select onchange="validateF()" id="from" >
-        <option value="">From</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EURO</option>
-        <option value="EGP">EGP</option>
-      </select>
-      <br><br>
-      <img height="40px" src="https://cdn-icons-png.flaticon.com/512/275/275137.png">
-      <br><br>
-      <select onchange="validateF()" id="to">
-        <option value="">To</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EURO</option>
-        <option value="EGP">EGP</option>
-      </select>
-      <script>
+</head>
 
-      </script>
-      <br><br>
-      <i style="color: rgb(173, 0, 0); padding: 20px;" id="check" ></i>
+<body>
+
+    <img style="margin-bottom:-80px;" src="https://cdn-icons-png.flaticon.com/512/5067/5067083.png" height="80px" />
+    <form>
+        <label for="amount">Amount</label>
+        <input onchange="validate()" id="amount" type="number" autofocus autocomplete="off" pattern="[0-9]*"
+            inputmode="numeric" min="0" step="10">
+
+        <select onchange="validate()" id="from">
+            <option value="">From</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EURO</option>
+            <option value="EGP">EGP</option>
+        </select>
+        <br><br>
+        <img height="40px" src="https://cdn-icons-png.flaticon.com/512/275/275137.png" />
+        <br><br>
+        <select onchange="validate()" id="to">
+            <option value="">To</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EURO</option>
+            <option value="EGP">EGP</option>
+        </select>
+        <script>
+
+        </script>
+        <br><br>
+        <i style="color: rgb(173, 0, 0); padding: 20px;" id="check"></i>
     </form>
     <br>
-    <button onclick="sndMsg()" type="submit"  >Send to WhatsApp</button>
+    <button onclick="sendMsg()" type="submit">Send to WhatsApp</button>
     <script>
-        function sndMsg(){
-             //validation complete action
-             if(checked){
-                document.getElementById("check").innerText = 'Button clicked';
-             var msg = "I want to convert "+am+" "+crf+" to "+crt;
-			var url = "https://api.whatsapp.com/send?phone=201024438296&text=" + msg;
-			window.location = url;
-             }
-             
+        var checked = false;
+        function sendMsg() {
+            if(checked==true){
+                var am = document.getElementById("amount").value;
+                var crf = document.getElementById("from").value;
+                var crt = document.getElementById("to").value;
+                var msg = "I want to convert " + am + " " + crf + " to " + crt; 
+                var url = "https://api.whatsapp.com/send?phone=201024438296&text=" + msg;
+                window.location = url;
             
+            }
+                
+
+
         }
-        function validateF(){
-            var checked = false;
-           var am = document.getElementById("amount").value;
-           var crf = document.getElementById("from").value;
-           var crt = document.getElementById("to").value;
-           if(am==''){
-            document.getElementById("check").innerText = 'Please enter an amount';
-           }else if(crf==''){
-            document.getElementById("check").innerText = 'Please choose from';
-           }else if(crt==''){
-            document.getElementById("check").innerText = 'Please choose to';
-           }else{
-           checked = true;
-           document.getElementById("check").innerText = "I want to convert "+am+" "+crf+" to "+crt;
-           
-           }
+
+        function validate() {
+            var am = document.getElementById("amount").value;
+            var crf = document.getElementById("from").value;
+            var crt = document.getElementById("to").value;
+            if (am == '') {
+                document.getElementById("check").innerText = 'Please enter an amount';
+            }
+            else if (crf == '') {
+                document.getElementById("check").innerText = 'Please choose from';
+            } else if (crt == '') {
+                document.getElementById("check").innerText = 'Please choose to';
+            }
+            else if (crf == crt) {
+                document.getElementById("check").innerHTML = "Don't chose same currency!";
+            } else {
+                checked = true;
+                document.getElementById("check").innerText = "I want to convert " + am + " " + crf + " to " + crt;
+
+            }
         }
-        
-        
-        
+
+
+
     </script>
-    
-    <div id="language-selector"  >
-      <span id="us-flag" >🇺🇸</span>
-      <span id="eg-flag" >🇪🇬</span>
-      <span id="tr-flag" >🇹🇷</span>
-      <br><br>
-    <div id="disclaimer" style="color: #737578;"  >Please don't share this website to unknown person</div>
-    <script>
-  // Language Selector Script
-  const usFlag = document.getElementById('us-flag');
-  const egFlag = document.getElementById('eg-flag');
-  const trFlag = document.getElementById('tr-flag');
 
-  const amountLabel = document.querySelector('label[for="amount"]');
-  const currencyLabel = document.querySelector('label[for="currency"]');
-  const submitButton = document.querySelector('button');
-  const disclaimer = document.getElementById('disclaimer');
+    <div id="language-selector">
+        <span id="us-flag">🇺🇸</span>
+        <span id="eg-flag">🇪🇬</span>
+        <span id="tr-flag">🇹🇷</span>
+        <br><br>
+        <div id="disclaimer" style="color: #737578;">Please don't share this website to unknown person</div>
+        <script>
+            // Language Selector Script
+            const usFlag = document.getElementById('us-flag');
+            const egFlag = document.getElementById('eg-flag');
+            const trFlag = document.getElementById('tr-flag');
 
-  const updateLabels = (language) => {
-    switch (language) {
-      case 'en':
-        document.documentElement.lang = 'en';
-        amountLabel.textContent = 'Amount';
-        currencyLabel.textContent = 'Currency';
-        submitButton.textContent = 'Send to WhatsApp';
-        disclaimer.textContent = 'Please don\'t share this website to unknown person';
-        break;
-      case 'ar':
-        document.documentElement.lang = 'ar';
-        amountLabel.textContent = 'المبلغ';
-        currencyLabel.textContent = 'العملة';
-        submitButton.textContent = 'إرسال إلى الواتساب';
-        disclaimer.textContent = 'يرجى عدم مشاركة هذا الموقع مع أي شخص لا تعرفه.';
-        break;
-      case 'tr':
-        document.documentElement.lang = 'tr';
-        amountLabel.textContent = 'Miktar';
-        currencyLabel.textContent = 'Para Birimi';
-        submitButton.textContent = 'WhatsApp\'a Gönder';
-        disclaimer.textContent = 'Lütfen bu web sitesini tanımadığınız kişilerle paylaşmayın.';
-        break;
-      default:
-        document.documentElement.lang = 'en';
-        amountLabel.textContent = 'Amount';
-        currencyLabel.textContent = 'Currency';
-        submitButton.textContent = 'Send to WhatsApp';
-        disclaimer.textContent = 'Please do not share this website with anyone you do not know.';
-        break;
-    }
-  };
+            const amountLabel = document.querySelector('label[for="amount"]');
+            const currencyLabel = document.querySelector('label[for="currency"]');
+            const submitButton = document.querySelector('button');
+            const disclaimer = document.getElementById('disclaimer');
 
-  const updateLanguage = (language) => {
-    switch (language) {
-      case 'us':
-        updateLabels('en');
-        break;
-      case 'eg':
-        updateLabels('ar');
-        break;
-      case 'tr':
-        updateLabels('tr');
-        break;
-      default:
-        updateLabels('en');
-        break;
-    }
-  };
+            const updateLabels = (language) => {
+                switch (language) {
+                    case 'en':
+                        document.documentElement.lang = 'en';
+                        amountLabel.textContent = 'Amount';
+                        currencyLabel.textContent = 'Currency';
+                        submitButton.textContent = 'Send to WhatsApp';
+                        disclaimer.textContent = 'Please don\'t share this website to unknown person';
+                        break;
+                    case 'ar':
+                        document.documentElement.lang = 'ar';
+                        amountLabel.textContent = 'المبلغ';
+                        currencyLabel.textContent = 'العملة';
+                        submitButton.textContent = 'إرسال إلى الواتساب';
+                        disclaimer.textContent = 'يرجى عدم مشاركة هذا الموقع مع أي شخص لا تعرفه.';
+                        break;
+                    case 'tr':
+                        document.documentElement.lang = 'tr';
+                        amountLabel.textContent = 'Miktar';
+                        currencyLabel.textContent = 'Para Birimi';
+                        submitButton.textContent = 'WhatsApp\'a Gönder';
+                        disclaimer.textContent = 'Lütfen bu web sitesini tanımadığınız kişilerle paylaşmayın.';
+                        break;
+                    default:
+                        document.documentElement.lang = 'en';
+                        amountLabel.textContent = 'Amount';
+                        currencyLabel.textContent = 'Currency';
+                        submitButton.textContent = 'Send to WhatsApp';
+                        disclaimer.textContent = 'Please do not share this website with anyone you do not know.';
+                        break;
+                }
+            };
 
-  usFlag.addEventListener('click', () => updateLanguage('us'));
-  egFlag.addEventListener('click', () => updateLanguage('eg'));
-  trFlag.addEventListener('click', () => updateLanguage('tr'));
+            const updateLanguage = (language) => {
+                switch (language) {
+                    case 'us':
+                        updateLabels('en');
+                        break;
+                    case 'eg':
+                        updateLabels('ar');
+                        break;
+                    case 'tr':
+                        updateLabels('tr');
+                        break;
+                    default:
+                        updateLabels('en');
+                        break;
+                }
+            };
 
-  // Set default language
-  updateLabels('en');
-</script>
+            usFlag.addEventListener('click', () => updateLanguage('us'));
+            egFlag.addEventListener('click', () => updateLanguage('eg'));
+            trFlag.addEventListener('click', () => updateLanguage('tr'));
 
-</body></html>
+            // Set default language
+            updateLabels('en');
+        </script>
+
+</body>
+
+</html>
